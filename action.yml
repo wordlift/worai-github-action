@@ -1,0 +1,45 @@
+name: 'Run worai graph sync'
+description: 'Install worai and run graph sync for a selected profile'
+author: 'WordLift'
+branding:
+  icon: 'upload-cloud'
+  color: 'blue'
+
+inputs:
+  profile:
+    description: 'Profile name defined in worai config'
+    required: true
+  config_path:
+    description: 'Optional path passed as --config to worai'
+    required: false
+    default: ''
+  debug:
+    description: 'Enable --debug (true/false)'
+    required: false
+    default: 'false'
+  working_directory:
+    description: 'Directory where worai should run'
+    required: false
+    default: '.'
+  worai_version:
+    description: 'Pinned worai version to install'
+    required: false
+    default: '1.14.0'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install worai
+      shell: bash
+      run: "$GITHUB_ACTION_PATH/scripts/install-worai.sh"
+      env:
+        INPUT_WORAI_VERSION: ${{ inputs.worai_version }}
+
+    - name: Run worai graph sync
+      shell: bash
+      run: "$GITHUB_ACTION_PATH/scripts/run-worai.sh"
+      env:
+        INPUT_PROFILE: ${{ inputs.profile }}
+        INPUT_CONFIG_PATH: ${{ inputs.config_path }}
+        INPUT_DEBUG: ${{ inputs.debug }}
+        INPUT_WORKING_DIRECTORY: ${{ inputs.working_directory }}

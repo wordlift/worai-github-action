@@ -1,0 +1,18 @@
+# Agent Guide
+
+## Verification
+
+- Run `./tests/run-worai.sh` and `./tests/install-worai.sh` after any logic change.
+- Add or update tests when behavior changes.
+
+## Documentation Sync
+
+- Keep `README.md`, `docs/`, `specs/`, `INDEX.md`, and `TODO.md` aligned with implementation.
+
+## Action Scope
+
+This repository provides a GitHub Action wrapper around:
+
+- `worai graph sync --profile <name> [--debug]`
+- `worai --config <path> graph sync --profile <name> [--debug]`
+- installation of pinned `worai` versions via `worai_version`

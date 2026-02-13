@@ -1,0 +1,70 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Validate version and tags
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          release_tag="${GITHUB_REF_NAME}"
+          if [[ ! "$release_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "error: tag must match vMAJOR.MINOR.PATCH (for example v1.2.3)" >&2
+            exit 1
+          fi
+
+          version="${release_tag#v}"
+          major_tag="v${version%%.*}"
+
+          {
+            echo "RELEASE_TAG=$release_tag"
+            echo "MAJOR_TAG=$major_tag"
+            echo "VERSION=$version"
+          } >> "$GITHUB_ENV"
+
+      - name: Move major alias tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -fa "$MAJOR_TAG" -m "Alias $MAJOR_TAG -> $RELEASE_TAG"
+          git push --force origin "refs/tags/$MAJOR_TAG"
+
+      - name: Publish GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          if gh release view "$RELEASE_TAG" --repo "$REPO" >/dev/null 2>&1; then
+            echo "Release already exists for $RELEASE_TAG; skipping creation."
+            exit 0
+          fi
+
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$REPO/releases" \
+            -f tag_name="$RELEASE_TAG" \
+            -f name="$RELEASE_TAG" \
+            -f target_commitish="${GITHUB_SHA}" \
+            -f generate_release_notes=true \
+            -F draft=false \
+            -F prerelease=false
