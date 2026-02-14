@@ -89,34 +89,30 @@ jobs:
 
 ## worai Config Examples
 
-Minimal `worai.toml` with explicit URLs:
+Multi-market Google Sheets setup (anonymized as `acme`):
 
 ```toml
-[production]
-api_key = "wl_***"
-urls = [
-  "https://example.com/page-1",
-  "https://example.com/page-2"
-]
-```
+[profiles._base]
+sheets_url = "https://docs.google.com/spreadsheets/d/ACME_SPREADSHEET_ID"
+sheets_service_account = "${SHEETS_SERVICE_ACCOUNT}"
+concurrency = 8
+overwrite = true
 
-Sitemap source:
+[profiles.de]
+api_key = "${WORDLIFT_API_KEY_DE}"
+sheets_name = "URLs_DE"
 
-```toml
-[production]
-api_key = "wl_***"
-sitemap_url = "https://example.com/sitemap.xml"
-sitemap_url_pattern = "/blog/"
-```
+[profiles.at]
+api_key = "${WORDLIFT_API_KEY_AT}"
+sheets_name = "URLs_AT"
 
-Google Sheets source:
+[profiles.ch]
+api_key = "${WORDLIFT_API_KEY_CH}"
+sheets_name = "URLs_CH"
 
-```toml
-[production]
-api_key = "wl_***"
-sheets_url = "https://docs.google.com/spreadsheets/d/..."
-sheets_name = "Sheet1"
-sheets_service_account = "/path/to/service-account.json"
+[profiles.us]
+api_key = "${WORDLIFT_API_KEY_US}"
+sheets_name = "URLs_US"
 ```
 
 ## Release and Pinning

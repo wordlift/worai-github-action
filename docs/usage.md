@@ -11,6 +11,32 @@
 - `sitemap_url` (optional `sitemap_url_pattern`)
 - Google Sheets (`sheets_url`, `sheets_name`, `sheets_service_account`)
 
+## Config Example (Acme)
+
+```toml
+[profiles._base]
+sheets_url = "https://docs.google.com/spreadsheets/d/ACME_SPREADSHEET_ID"
+sheets_service_account = "${SHEETS_SERVICE_ACCOUNT}"
+concurrency = 8
+overwrite = true
+
+[profiles.de]
+api_key = "${WORDLIFT_API_KEY_DE}"
+sheets_name = "URLs_DE"
+
+[profiles.at]
+api_key = "${WORDLIFT_API_KEY_AT}"
+sheets_name = "URLs_AT"
+
+[profiles.ch]
+api_key = "${WORDLIFT_API_KEY_CH}"
+sheets_name = "URLs_CH"
+
+[profiles.us]
+api_key = "${WORDLIFT_API_KEY_US}"
+sheets_name = "URLs_US"
+```
+
 ## Config Discovery
 
 When `config_path` is not provided, `worai` discovers config in this order:
