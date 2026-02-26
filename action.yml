@@ -85,7 +85,7 @@ runs:
         INPUT_PLAYWRIGHT_VERSION: ${{ inputs.playwright_version }}
         INPUT_PLAYWRIGHT_BROWSER: ${{ inputs.playwright_browser }}
 
-    - name: Run worai graph sync
+    - name: Run worai graph sync run
       shell: bash
       run: "$GITHUB_ACTION_PATH/scripts/run-worai.sh"
       env:

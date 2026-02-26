@@ -56,7 +56,7 @@ The action installs Playwright via:
 4. Build command:
    - base: `worai`
    - optional root config: `--config <path>`
-   - subcommand: `graph sync --profile <name>`
+   - subcommand: `graph sync run --profile <name>`
    - optional: `--debug`
 5. Execute command from `working_directory`.
 

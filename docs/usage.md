@@ -2,8 +2,8 @@
 
 ## Command Forms
 
-- `worai graph sync --profile <name> [--debug]`
-- `worai --config <path> graph sync --profile <name> [--debug]`
+- `worai graph sync run --profile <name> [--debug]`
+- `worai --config <path> graph sync run --profile <name> [--debug]`
 
 ## Source Types
 

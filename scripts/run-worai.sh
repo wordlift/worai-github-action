@@ -28,7 +28,7 @@ if [[ -n "$config_path" ]]; then
   cmd+=("--config" "$config_path")
 fi
 
-cmd+=("graph" "sync" "--profile" "$profile")
+cmd+=("graph" "sync" "run" "--profile" "$profile")
 
 case "$debug_lower" in
   true|1|yes)

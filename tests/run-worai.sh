@@ -54,14 +54,14 @@ rm -f "$TMP_DIR/args.txt"
 code=$(run_case no_config "${BASE_ENV[@]}" INPUT_PROFILE="demo" INPUT_DEBUG="false" INPUT_WORKING_DIRECTORY="$ROOT_DIR" "$SCRIPT")
 assert_eq "0" "$code" "no config should succeed"
 args=$(cat "$TMP_DIR/args.txt")
-assert_eq "graph sync --profile demo" "$args" "command without config/debug"
+assert_eq "graph sync run --profile demo" "$args" "command without config/debug"
 
 # Case 3: with config and debug
 rm -f "$TMP_DIR/args.txt"
 code=$(run_case with_config_debug "${BASE_ENV[@]}" INPUT_PROFILE="prod" INPUT_CONFIG_PATH="./worai.toml" INPUT_DEBUG="true" INPUT_WORKING_DIRECTORY="$ROOT_DIR" "$SCRIPT")
 assert_eq "0" "$code" "config+debug should succeed"
 args=$(cat "$TMP_DIR/args.txt")
-assert_eq "--config ./worai.toml graph sync --profile prod --debug" "$args" "command with config/debug"
+assert_eq "--config ./worai.toml graph sync run --profile prod --debug" "$args" "command with config/debug"
 
 # Case 4: invalid debug
 code=$(run_case invalid_debug "${BASE_ENV[@]}" INPUT_PROFILE="demo" INPUT_DEBUG="maybe" INPUT_WORKING_DIRECTORY="$ROOT_DIR" "$SCRIPT")

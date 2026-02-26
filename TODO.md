@@ -2,7 +2,7 @@
 
 ## Completed
 
-- [x] Create composite GitHub Action to install and run `worai graph sync`.
+- [x] Create composite GitHub Action to install and run `worai graph sync run`.
 - [x] Implement wrapper script for `--config`, `--profile`, and optional `--debug`.
 - [x] Add local tests for command construction and input validation.
 - [x] Add installer tests for Python preflight and pinned version install command.

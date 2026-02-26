@@ -2,8 +2,8 @@
 
 GitHub Action to install `worai`, install Python Playwright + Chromium, and run:
 
-- `worai graph sync --profile <name> [--debug]`
-- `worai --config <path> graph sync --profile <name> [--debug]`
+- `worai graph sync run --profile <name> [--debug]`
+- `worai --config <path> graph sync run --profile <name> [--debug]`
 
 ## Requirements
 
@@ -28,9 +28,9 @@ GitHub Action to install `worai`, install Python Playwright + Chromium, and run:
 ## Behavior
 
 - If `config_path` is set, command is:
-  - `worai --config <path> graph sync --profile <name> [--debug]`
+  - `worai --config <path> graph sync run --profile <name> [--debug]`
 - If `config_path` is not set, command is:
-  - `worai graph sync --profile <name> [--debug]`
+  - `worai graph sync run --profile <name> [--debug]`
 
 Without root `--config`, standard `worai` config discovery applies:
 
