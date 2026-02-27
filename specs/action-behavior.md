@@ -6,7 +6,7 @@
 - `config_path` (optional)
 - `debug` (optional, default `false`)
 - `working_directory` (optional, default `.`)
-- `worai_version` (optional, default `6.7.2`)
+- `worai_version` (optional, default `6.7.3`)
 - `install_playwright` (optional, default `true`)
 - `playwright_version` (optional, default `1.55.0`)
 - `playwright_browser` (optional, default `chromium`)
@@ -75,5 +75,6 @@ The wrapper fails if inputs are invalid or `worai` is unavailable in `PATH`.
 - The workflow:
   - validates tag format (`vMAJOR.MINOR.PATCH`)
   - force-updates major alias tag (`v<major>`)
+  - force-updates minor alias tag (`v<major>.<minor>`)
   - publishes GitHub Release with generated notes (skips if already present)
   - writes a post-release summary for required manual Marketplace publication fields

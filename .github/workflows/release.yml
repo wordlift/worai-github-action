@@ -29,21 +29,25 @@ jobs:
 
           version="${release_tag#v}"
           major_tag="v${version%%.*}"
+          minor_tag="v$(printf '%s' "$version" | cut -d. -f1-2)"
 
           {
             echo "RELEASE_TAG=$release_tag"
             echo "MAJOR_TAG=$major_tag"
+            echo "MINOR_TAG=$minor_tag"
             echo "VERSION=$version"
           } >> "$GITHUB_ENV"
 
-      - name: Move major alias tag
+      - name: Move major and minor alias tags
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git tag -fa "$MAJOR_TAG" -m "Alias $MAJOR_TAG -> $RELEASE_TAG"
+          git tag -fa "$MINOR_TAG" -m "Alias $MINOR_TAG -> $RELEASE_TAG"
           git push --force origin "refs/tags/$MAJOR_TAG"
+          git push --force origin "refs/tags/$MINOR_TAG"
 
       - name: Publish GitHub Release
         shell: bash

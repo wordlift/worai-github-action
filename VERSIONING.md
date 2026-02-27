@@ -12,6 +12,7 @@ This repository uses a lockstep-major versioning strategy with `worai`.
    - default `worai_version` is bumped within the same major line
 4. Any default `worai_version` bump across majors requires a new action major release.
 5. Major alias tags (`v6`, `v7`, ...) must always point to the latest immutable release tag in that major line.
+6. Minor alias tags (`v6.4`, `v7.2`, ...) must always point to the latest immutable release tag in that minor line.
 
 ## Compatibility
 
@@ -21,4 +22,6 @@ This repository uses a lockstep-major versioning strategy with `worai`.
 ## Consumer Guidance
 
 - For maximum supply-chain integrity, pin action usage to a full commit SHA.
-- For convenience and managed updates, use the major alias tag (for example `@v6`).
+- For convenience and managed updates, use an alias tag:
+  - major alias (for example `@v6`) for latest in a major line
+  - minor alias (for example `@v6.4`) for latest patch in a minor line

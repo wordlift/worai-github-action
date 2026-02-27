@@ -4,7 +4,7 @@
 - `VERSIONING.md`: action and `worai` versioning and compatibility policy.
 - `LICENSE`: project license.
 - `action.yml`: action metadata and execution steps.
-- `.github/workflows/release.yml`: manual release automation for immutable tags and major aliases.
+- `.github/workflows/release.yml`: manual release automation for immutable tags and major/minor aliases.
 - `scripts/install-worai.sh`: pinned `worai` installer with Python preflight checks.
 - `scripts/install-playwright.sh`: optional Playwright/Chromium installer with input validation.
 - `scripts/resolve-cache-key.sh`: cache input validation and cache key suffix resolution.
