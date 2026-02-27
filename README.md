@@ -2,8 +2,8 @@
 
 GitHub Action to install `worai`, install Python Playwright + Chromium, and run:
 
-- `worai graph sync run --profile <name> [--debug]`
-- `worai --config <path> graph sync run --profile <name> [--debug]`
+- `worai --profile <name> graph sync run [--debug]`
+- `worai --config <path> --profile <name> graph sync run [--debug]`
 
 ## Requirements
 
@@ -18,7 +18,7 @@ GitHub Action to install `worai`, install Python Playwright + Chromium, and run:
 | `config_path` | No | `''` | If set, action runs `worai --config <path> ...`. |
 | `debug` | No | `false` | When truthy (`true/1/yes`), appends `--debug`. |
 | `working_directory` | No | `.` | Directory where `worai` runs. |
-| `worai_version` | No | `6.5.3` | Exact `worai` version installed by the action. |
+| `worai_version` | No | `6.7.0` | Exact `worai` version installed by the action. |
 | `install_playwright` | No | `true` | Installs Playwright Python package and browser binaries when truthy (`true/1/yes`). |
 | `playwright_version` | No | `1.55.0` | Exact Playwright Python package version installed when Playwright install is enabled. |
 | `playwright_browser` | No | `chromium` | Browser passed to `python -m playwright install`. |
@@ -28,9 +28,9 @@ GitHub Action to install `worai`, install Python Playwright + Chromium, and run:
 ## Behavior
 
 - If `config_path` is set, command is:
-  - `worai --config <path> graph sync run --profile <name> [--debug]`
+  - `worai --config <path> --profile <name> graph sync run [--debug]`
 - If `config_path` is not set, command is:
-  - `worai graph sync run --profile <name> [--debug]`
+  - `worai --profile <name> graph sync run [--debug]`
 
 Without root `--config`, standard `worai` config discovery applies:
 
@@ -137,7 +137,7 @@ sheets_name = "URLs_US"
 ## Migration from `@v1`
 
 - Replace `uses: wordlift/graph-sync@v1` with `uses: wordlift/graph-sync@v6`.
-- Action `v6` defaults to installing `worai` `6.5.3`.
+- Action `v6` defaults to installing `worai` `6.7.0`.
 
 ## Development
 

@@ -13,8 +13,8 @@
 
 This repository provides a GitHub Action wrapper around:
 
-- `worai graph sync run --profile <name> [--debug]`
-- `worai --config <path> graph sync run --profile <name> [--debug]`
+- `worai --profile <name> graph sync run [--debug]`
+- `worai --config <path> --profile <name> graph sync run [--debug]`
 - installation of pinned `worai` versions via `worai_version`
 - optional installation of pinned Python Playwright + browser binaries
 - optional cache restore/save for pip and Playwright browser binaries

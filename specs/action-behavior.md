@@ -6,7 +6,7 @@
 - `config_path` (optional)
 - `debug` (optional, default `false`)
 - `working_directory` (optional, default `.`)
-- `worai_version` (optional, default `6.5.3`)
+- `worai_version` (optional, default `6.7.0`)
 - `install_playwright` (optional, default `true`)
 - `playwright_version` (optional, default `1.55.0`)
 - `playwright_browser` (optional, default `chromium`)
@@ -56,7 +56,8 @@ The action installs Playwright via:
 4. Build command:
    - base: `worai`
    - optional root config: `--config <path>`
-   - subcommand: `graph sync run --profile <name>`
+   - root profile option: `--profile <name>`
+   - subcommand: `graph sync run`
    - optional: `--debug`
 5. Execute command from `working_directory`.
 
