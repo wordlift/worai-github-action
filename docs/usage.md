@@ -9,16 +9,18 @@
 
 - `urls`
 - `sitemap_url` (optional `sitemap_url_pattern`)
-- Google Sheets (`sheets_url`, `sheets_name`, `sheets_service_account`)
+- Google Sheets (`sheets_url`, `sheets_name`, `oauth.service_account`)
+- Configure exactly one source mode per run.
 
 ## Config Example (Acme)
 
 ```toml
 [profiles._base]
 sheets_url = "https://docs.google.com/spreadsheets/d/ACME_SPREADSHEET_ID"
-sheets_service_account = "${SHEETS_SERVICE_ACCOUNT}"
 concurrency = 8
 overwrite = true
+[profiles._base.oauth]
+service_account = "${SHEETS_SERVICE_ACCOUNT}"
 
 [profiles.de]
 api_key = "${WORDLIFT_API_KEY_DE}"
@@ -52,6 +54,17 @@ When `config_path` is not provided, `worai` discovers config in this order:
 - Profile value overrides global value.
 - Defaults to `false` when unset.
 - Mapped to SDK setting `GOOGLE_SEARCH_CONSOLE`.
+
+## Google Sheets Service Account
+
+- `oauth.service_account` accepts:
+  - inline JSON object content
+  - path to an existing credentials file
+- When using Google Sheets source (`sheets_url` + `sheets_name`), `oauth.service_account` is required.
+- `graph sync run` fails for Google Sheets source when:
+  - value is missing or empty
+  - value is neither valid JSON object content nor an existing file path
+  - value is valid JSON but not an object
 
 ## Installer Behavior
 

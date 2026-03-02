@@ -67,7 +67,10 @@ The wrapper fails if inputs are invalid or `worai` is unavailable in `PATH`.
 `worai` itself is expected to enforce profile and source-specific config constraints, including:
 
 - missing `api_key` in selected profile
-- Google Sheets `sheets_service_account` validation failures
+- Google Sheets `oauth.service_account` validation failures:
+  - missing or empty value when Sheets source is used
+  - value is neither valid JSON object content nor an existing file path
+  - value is valid JSON but not an object
 
 ## Release Automation
 

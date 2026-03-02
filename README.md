@@ -48,10 +48,10 @@ For `graph sync run`, current `worai` profile resolution order is:
 
 ## Notes
 
-- Supported input sources are managed by `worai` config: `urls`, `sitemap_url` (+ optional `sitemap_url_pattern`), and Google Sheets (`sheets_url` + `sheets_name` + `sheets_service_account`).
+- Supported input sources are managed by `worai` config: `urls`, `sitemap_url` (+ optional `sitemap_url_pattern`), and Google Sheets (`sheets_url` + `sheets_name` + `oauth.service_account`).
 - Configure exactly one input source mode per run.
-- `sheets_service_account` accepts inline JSON object content or a file path.
-- For Google Sheets source, `sheets_service_account` is required and the command fails when:
+- `oauth.service_account` accepts inline JSON object content or a file path.
+- For Google Sheets source, `oauth.service_account` is required and the command fails when:
   - value is missing or empty
   - value is neither valid JSON object content nor an existing file path
   - value is valid JSON but not an object
@@ -134,8 +134,9 @@ Google Sheets source example:
 api_key = "${WORDLIFT_API_KEY}"
 sheets_url = "https://docs.google.com/spreadsheets/d/ACME_SPREADSHEET_ID"
 sheets_name = "URLs"
-sheets_service_account = "${SHEETS_SERVICE_ACCOUNT}"
 ingest_source = "sheets"
+[profiles.acme_sheets.oauth]
+service_account = "${SHEETS_SERVICE_ACCOUNT}"
 ```
 
 Optional local default profile selection:
