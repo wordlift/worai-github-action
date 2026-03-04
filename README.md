@@ -18,7 +18,7 @@ GitHub Action to install `worai`, install Python Playwright + Chromium, and run:
 | `config_path` | No | `''` | If set, action runs `worai --config <path> ...`. |
 | `debug` | No | `false` | When truthy (`true/1/yes`), appends `--debug`. |
 | `working_directory` | No | `.` | Directory where `worai` runs. |
-| `worai_version` | No | `6.9.6` | Exact `worai` version installed by the action. |
+| `worai_version` | No | `6.9.7` | Exact `worai` version installed by the action. |
 | `install_playwright` | No | `true` | Installs Playwright Python package and browser binaries when truthy (`true/1/yes`). |
 | `playwright_version` | No | `1.55.0` | Exact Playwright Python package version installed when Playwright install is enabled. |
 | `playwright_browser` | No | `chromium` | Browser passed to `python -m playwright install`. |
@@ -151,7 +151,7 @@ export WORAI_PROFILE="acme_sitemap"
 - Consumers should pin this action to a full commit SHA for maximum integrity.
 - If using tags, use managed aliases:
   - major alias (`@v6`) tracks latest `v6.x.y`
-  - minor alias (`@v6.4`) tracks latest `v6.4.z`
+- minor alias (`@v6.5`) tracks latest `v6.5.z`
 - The release workflow force-updates both alias tags on each release tag push.
 - This repository includes automated release workflow `.github/workflows/release.yml` triggered by pushing tags like `v6.0.0`.
 - Marketplace publication itself is still a manual GitHub UI step; the release workflow adds a summary with a direct release link and checklist.
@@ -160,7 +160,7 @@ export WORAI_PROFILE="acme_sitemap"
 ## Migration from `@v1`
 
 - Replace `uses: wordlift/graph-sync@v1` with `uses: wordlift/graph-sync@v6`.
-- Action `v6` defaults to installing `worai` `6.9.6`.
+- Action `v6` defaults to installing `worai` `6.9.7`.
 
 ## Development
 
