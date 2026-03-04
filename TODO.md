@@ -13,6 +13,7 @@
 - [x] Refresh `worai.toml` docs examples with anonymized multi-profile Google Sheets config (`acme`).
 - [x] Add optional Python Playwright installer with Chromium browser defaults and dedicated tests.
 - [x] Add optional built-in cache for pip and Playwright binaries with auto-derived cache key suffix fallback.
+- [x] Bump default pinned `worai_version` to `6.9.6` and sync tests/docs/specs references.
 - [x] Clarify `sheets_service_account` documentation in README/docs/specs (accepted formats and failure cases).
 - [x] Clarify `sheets_service_account` vs `oauth.service_account` naming compatibility in docs/specs for `worai` `6.9.4`.
 - [x] Switch docs/examples to use `oauth.service_account` naming for Google Sheets credentials.
