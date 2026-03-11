@@ -18,9 +18,9 @@ GitHub Action to install `worai`, install Python Playwright + Chromium, and run:
 | `config_path` | No | `''` | If set, action runs `worai --config <path> ...`. |
 | `debug` | No | `false` | When truthy (`true/1/yes`), appends `--debug`. |
 | `working_directory` | No | `.` | Directory where `worai` runs. |
-| `worai_version` | No | `6.12.12` | Exact `worai` version installed by the action. |
+| `worai_version` | No | `6.13.1` | Exact `worai` version installed by the action. |
 | `install_playwright` | No | `true` | Installs Playwright Python package and browser binaries when truthy (`true/1/yes`). |
-| `playwright_version` | No | `1.55.0` | Exact Playwright Python package version installed when Playwright install is enabled. |
+| `playwright_version` | No | `1.58.0` | Exact Playwright Python package version installed when Playwright install is enabled. |
 | `playwright_browser` | No | `chromium` | Browser passed to `python -m playwright install`. |
 | `cache_enabled` | No | `true` | Enables dependency cache for pip and Playwright browser binaries when truthy (`true/1/yes`). |
 | `cache_key_suffix` | No | `''` | Optional cache key suffix. When empty, action derives `<worai_version>-<playwright_version>-<playwright_browser>`. |
@@ -57,7 +57,7 @@ For `graph sync run`, current `worai` profile resolution order is:
   - value is valid JSON but not an object
 - `google_search_console` can be global or profile-level in `worai.toml`; profile value overrides global value; default is `false` when unset; maps to SDK setting `GOOGLE_SEARCH_CONSOLE`.
 - The command fails when selected profile does not define `api_key`.
-- By default, the action installs `playwright==1.55.0` and Chromium. Set `install_playwright: false` to skip this step.
+- By default, the action installs `playwright==1.58.0` and Chromium. Set `install_playwright: false` to skip this step.
 - By default, cache is enabled for `~/.cache/pip` and `~/.cache/ms-playwright`.
 - Default cache key format is `<runner.os>-graph-sync-<worai_version>-<playwright_version>-<playwright_browser>`.
 - Set `cache_enabled: false` to disable cache or set `cache_key_suffix` to control the key suffix directly.
@@ -97,7 +97,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@v6
       - uses: wordlift/graph-sync@v6
         with:
           profile: production
@@ -109,6 +109,7 @@ jobs:
 
 - `actions/checkout` is required only if your config file is in the repo workspace.
 - `actions/setup-python` is optional on GitHub-hosted runners (Python is usually preinstalled), but recommended if you want a fixed Python version.
+- When cache is enabled, `actions/cache` `v5.0.3` requires GitHub Actions Runner `2.327.1` or newer on self-hosted runners.
 - GitHub-hosted Ubuntu runners typically satisfy Chromium runtime dependencies. On custom/self-hosted runners, install required OS packages before using Playwright.
 
 ## worai Config Examples
@@ -160,7 +161,7 @@ export WORAI_PROFILE="acme_sitemap"
 ## Migration from `@v1`
 
 - Replace `uses: wordlift/graph-sync@v1` with `uses: wordlift/graph-sync@v6`.
-- Action `v6` defaults to installing `worai` `6.12.12`.
+- Action `v6` defaults to installing `worai` `6.13.1`.
 
 ## Development
 

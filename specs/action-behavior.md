@@ -6,9 +6,9 @@
 - `config_path` (optional)
 - `debug` (optional, default `false`)
 - `working_directory` (optional, default `.`)
-- `worai_version` (optional, default `6.12.12`)
+- `worai_version` (optional, default `6.13.1`)
 - `install_playwright` (optional, default `true`)
-- `playwright_version` (optional, default `1.55.0`)
+- `playwright_version` (optional, default `1.58.0`)
 - `playwright_browser` (optional, default `chromium`)
 - `cache_enabled` (optional, default `true`)
 - `cache_key_suffix` (optional, default empty string)
@@ -47,6 +47,7 @@ The action installs Playwright via:
 6. Cache paths:
    - `~/.cache/pip`
    - `~/.cache/ms-playwright`
+7. Self-hosted runners must use GitHub Actions Runner `2.327.1` or newer because the action uses `actions/cache` `v5.0.3`.
 
 ## Execution
 

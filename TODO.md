@@ -20,6 +20,9 @@
 - [x] Bump default pinned `worai_version` to `6.12.1` and sync tests/docs/specs references.
 - [x] Bump default pinned `worai_version` to `6.12.11` and sync tests/docs/specs references.
 - [x] Bump default pinned `worai_version` to `6.12.12` and sync tests/docs/specs references.
+- [x] Bump default pinned `worai_version` to `6.13.1` and sync tests/docs/specs references.
+- [x] Bump default pinned `playwright_version` to `1.58.0` and sync tests/docs/specs references.
+- [x] Update GitHub Actions dependencies to `actions/cache` `v5.0.3` and `actions/checkout` `v6.0.2`.
 - [x] Clarify `sheets_service_account` documentation in README/docs/specs (accepted formats and failure cases).
 - [x] Clarify `sheets_service_account` vs `oauth.service_account` naming compatibility in docs/specs for `worai` `6.9.4`.
 - [x] Switch docs/examples to use `oauth.service_account` naming for Google Sheets credentials.

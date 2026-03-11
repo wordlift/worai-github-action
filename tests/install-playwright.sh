@@ -67,15 +67,15 @@ assert_eq "0" "$call_count" "disabled install should not call python"
 
 # Case 4: enabled install executes pip install and browser install
 rm -f "$TMP_DIR/python_calls.txt"
-code=$(run_case install_chromium "${BASE_ENV[@]}" INPUT_INSTALL_PLAYWRIGHT="true" INPUT_PLAYWRIGHT_VERSION="1.55.0" INPUT_PLAYWRIGHT_BROWSER="chromium" "$SCRIPT")
+code=$(run_case install_chromium "${BASE_ENV[@]}" INPUT_INSTALL_PLAYWRIGHT="true" INPUT_PLAYWRIGHT_VERSION="1.58.0" INPUT_PLAYWRIGHT_BROWSER="chromium" "$SCRIPT")
 assert_eq "0" "$code" "enabled install should succeed"
 first_call=$(sed -n '1p' "$TMP_DIR/python_calls.txt")
 second_call=$(sed -n '2p' "$TMP_DIR/python_calls.txt")
-assert_eq "-m pip install playwright==1.55.0" "$first_call" "first command installs pinned playwright"
+assert_eq "-m pip install playwright==1.58.0" "$first_call" "first command installs pinned playwright"
 assert_eq "-m playwright install chromium" "$second_call" "second command installs chromium browser"
 
 # Case 5: whitespace in browser should fail
-code=$(run_case bad_browser "${BASE_ENV[@]}" INPUT_INSTALL_PLAYWRIGHT="true" INPUT_PLAYWRIGHT_VERSION="1.55.0" INPUT_PLAYWRIGHT_BROWSER="chrome stable" "$SCRIPT")
+code=$(run_case bad_browser "${BASE_ENV[@]}" INPUT_INSTALL_PLAYWRIGHT="true" INPUT_PLAYWRIGHT_VERSION="1.58.0" INPUT_PLAYWRIGHT_BROWSER="chrome stable" "$SCRIPT")
 assert_eq "1" "$code" "browser with whitespace should fail"
 
 if [[ "$fail_count" -ne 0 ]]; then

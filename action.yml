@@ -24,7 +24,7 @@ inputs:
   worai_version:
     description: 'Pinned worai version to install'
     required: false
-    default: '6.12.12'
+    default: '6.13.1'
   install_playwright:
     description: 'Install Playwright Python package and browser binaries (true/false)'
     required: false
@@ -32,7 +32,7 @@ inputs:
   playwright_version:
     description: 'Pinned Playwright Python package version to install'
     required: false
-    default: '1.55.0'
+    default: '1.58.0'
   playwright_browser:
     description: 'Playwright browser to install'
     required: false
@@ -62,7 +62,7 @@ runs:
 
     - name: Cache pip and Playwright binaries
       if: ${{ steps.resolve_cache.outputs.cache_enabled == 'true' }}
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: |
           ~/.cache/pip
