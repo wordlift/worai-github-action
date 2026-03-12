@@ -4,8 +4,10 @@ set -euo pipefail
 profile="${INPUT_PROFILE:-}"
 config_path="${INPUT_CONFIG_PATH:-}"
 debug="${INPUT_DEBUG:-false}"
+log_level="${INPUT_LOG_LEVEL:-warning}"
 working_directory="${INPUT_WORKING_DIRECTORY:-.}"
 debug_lower="$(printf '%s' "$debug" | tr '[:upper:]' '[:lower:]')"
+log_level_lower="$(printf '%s' "$log_level" | tr '[:upper:]' '[:lower:]')"
 
 if [[ -z "$profile" ]]; then
   echo "error: input 'profile' is required" >&2
@@ -42,9 +44,22 @@ case "$debug_lower" in
     ;;
 esac
 
+case "$log_level_lower" in
+  ''|debug|info|warning|error)
+    ;;
+  *)
+    echo "error: input 'log_level' must be one of: debug, info, warning, error" >&2
+    exit 1
+    ;;
+esac
+
 cd "$working_directory"
 printf 'Running:'
 printf ' %q' "${cmd[@]}"
 printf '\n'
 
-"${cmd[@]}"
+if [[ -n "$log_level_lower" ]]; then
+  WORAI_LOG_LEVEL="$log_level_lower" "${cmd[@]}"
+else
+  "${cmd[@]}"
+fi

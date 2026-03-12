@@ -17,6 +17,10 @@ inputs:
     description: 'Enable --debug (true/false)'
     required: false
     default: 'false'
+  log_level:
+    description: 'Optional WORAI_LOG_LEVEL value (debug/info/warning/error)'
+    required: false
+    default: 'warning'
   working_directory:
     description: 'Directory where worai should run'
     required: false
@@ -92,4 +96,5 @@ runs:
         INPUT_PROFILE: ${{ inputs.profile }}
         INPUT_CONFIG_PATH: ${{ inputs.config_path }}
         INPUT_DEBUG: ${{ inputs.debug }}
+        INPUT_LOG_LEVEL: ${{ inputs.log_level }}
         INPUT_WORKING_DIRECTORY: ${{ inputs.working_directory }}

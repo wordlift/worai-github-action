@@ -40,21 +40,24 @@ mkdir -p "$FAKE_BIN"
 cat > "$FAKE_BIN/worai" <<'EOS'
 #!/usr/bin/env bash
 printf '%s\n' "$*" > "$WORAI_ARGS_FILE"
+printf '%s\n' "${WORAI_LOG_LEVEL:-}" > "$WORAI_LOG_LEVEL_FILE"
 EOS
 chmod +x "$FAKE_BIN/worai"
 
-BASE_ENV=(env PATH="$FAKE_BIN:$PATH" WORAI_ARGS_FILE="$TMP_DIR/args.txt")
+BASE_ENV=(env PATH="$FAKE_BIN:$PATH" WORAI_ARGS_FILE="$TMP_DIR/args.txt" WORAI_LOG_LEVEL_FILE="$TMP_DIR/log-level.txt")
 
 # Case 1: missing profile
 code=$(run_case missing_profile "${BASE_ENV[@]}" INPUT_WORKING_DIRECTORY="$ROOT_DIR" "$SCRIPT")
 assert_eq "1" "$code" "missing profile should fail"
 
 # Case 2: standard invocation without config
-rm -f "$TMP_DIR/args.txt"
+rm -f "$TMP_DIR/args.txt" "$TMP_DIR/log-level.txt"
 code=$(run_case no_config "${BASE_ENV[@]}" INPUT_PROFILE="demo" INPUT_DEBUG="false" INPUT_WORKING_DIRECTORY="$ROOT_DIR" "$SCRIPT")
 assert_eq "0" "$code" "no config should succeed"
 args=$(cat "$TMP_DIR/args.txt")
 assert_eq "--profile demo graph sync run" "$args" "command without config/debug"
+log_level=$(cat "$TMP_DIR/log-level.txt")
+assert_eq "warning" "$log_level" "default log level should be warning"
 
 # Case 3: with config and debug
 rm -f "$TMP_DIR/args.txt"
@@ -67,7 +70,20 @@ assert_eq "--config ./worai.toml --profile prod graph sync run --debug" "$args" 
 code=$(run_case invalid_debug "${BASE_ENV[@]}" INPUT_PROFILE="demo" INPUT_DEBUG="maybe" INPUT_WORKING_DIRECTORY="$ROOT_DIR" "$SCRIPT")
 assert_eq "1" "$code" "invalid debug should fail"
 
-# Case 5: missing working directory
+# Case 5: valid log level
+rm -f "$TMP_DIR/args.txt" "$TMP_DIR/log-level.txt"
+code=$(run_case valid_log_level "${BASE_ENV[@]}" INPUT_PROFILE="demo" INPUT_LOG_LEVEL="WARNING" INPUT_WORKING_DIRECTORY="$ROOT_DIR" "$SCRIPT")
+assert_eq "0" "$code" "valid log level should succeed"
+args=$(cat "$TMP_DIR/args.txt")
+assert_eq "--profile demo graph sync run" "$args" "command with log level should not add extra args"
+log_level=$(cat "$TMP_DIR/log-level.txt")
+assert_eq "warning" "$log_level" "explicit log level should be exported via WORAI_LOG_LEVEL"
+
+# Case 6: invalid log level
+code=$(run_case invalid_log_level "${BASE_ENV[@]}" INPUT_PROFILE="demo" INPUT_LOG_LEVEL="trace" INPUT_WORKING_DIRECTORY="$ROOT_DIR" "$SCRIPT")
+assert_eq "1" "$code" "invalid log level should fail"
+
+# Case 7: missing working directory
 code=$(run_case bad_workdir "${BASE_ENV[@]}" INPUT_PROFILE="demo" INPUT_WORKING_DIRECTORY="$ROOT_DIR/nope" "$SCRIPT")
 assert_eq "1" "$code" "invalid working directory should fail"
 

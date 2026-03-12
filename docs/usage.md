@@ -4,6 +4,7 @@
 
 - `worai --profile <name> graph sync run [--debug]`
 - `worai --config <path> --profile <name> graph sync run [--debug]`
+- The action sets `WORAI_LOG_LEVEL` to `warning` by default; supported values are `debug|info|warning|error`
 
 ## Source Types
 

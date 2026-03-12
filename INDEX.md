@@ -9,7 +9,7 @@
 - `scripts/install-playwright.sh`: optional Playwright/Chromium installer with input validation.
 - `scripts/resolve-cache-key.sh`: cache input validation and cache key suffix resolution.
 - `scripts/run-worai.sh`: runtime wrapper that validates inputs and runs `worai`.
-- `tests/run-worai.sh`: local test suite for wrapper behavior.
+- `tests/run-worai.sh`: local test suite for wrapper behavior, including `debug` and `log_level`.
 - `tests/install-worai.sh`: local test suite for installer behavior.
 - `tests/install-playwright.sh`: local test suite for Playwright installer behavior.
 - `tests/resolve-cache-key.sh`: local test suite for cache key resolution behavior.

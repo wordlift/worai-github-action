@@ -5,6 +5,7 @@
 - `profile` (required)
 - `config_path` (optional)
 - `debug` (optional, default `false`)
+- `log_level` (optional, default `warning`)
 - `working_directory` (optional, default `.`)
 - `worai_version` (optional, default `6.13.1`)
 - `install_playwright` (optional, default `true`)
@@ -54,13 +55,15 @@ The action installs Playwright via:
 1. Validate required `profile`.
 2. Validate `working_directory` exists.
 3. Validate `debug` is boolean-like (`true/false/1/0/yes/no`).
-4. Build command:
+4. Validate `log_level` is one of `debug|info|warning|error`.
+5. Build command:
    - base: `worai`
    - optional root config: `--config <path>`
    - root profile option: `--profile <name>`
    - subcommand: `graph sync run`
    - optional: `--debug`
-5. Execute command from `working_directory`.
+6. Execute `worai` with `WORAI_LOG_LEVEL=<value>` in the process environment.
+7. Execute command from `working_directory`.
 
 ## Failure Semantics
 

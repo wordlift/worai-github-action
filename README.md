@@ -17,6 +17,7 @@ GitHub Action to install `worai`, install Python Playwright + Chromium, and run:
 | `profile` | Yes | - | Profile name passed to `--profile`. Must exist in selected config. |
 | `config_path` | No | `''` | If set, action runs `worai --config <path> ...`. |
 | `debug` | No | `false` | When truthy (`true/1/yes`), appends `--debug`. |
+| `log_level` | No | `warning` | Exports `WORAI_LOG_LEVEL` as `debug`, `info`, `warning`, or `error`. |
 | `working_directory` | No | `.` | Directory where `worai` runs. |
 | `worai_version` | No | `6.13.1` | Exact `worai` version installed by the action. |
 | `install_playwright` | No | `true` | Installs Playwright Python package and browser binaries when truthy (`true/1/yes`). |
@@ -31,6 +32,7 @@ GitHub Action to install `worai`, install Python Playwright + Chromium, and run:
   - `worai --config <path> --profile <name> graph sync run [--debug]`
 - If `config_path` is not set, command is:
   - `worai --profile <name> graph sync run [--debug]`
+- The action exports `WORAI_LOG_LEVEL=<value>` for the `worai` process. Default is `warning`.
 - The action always passes the root `--profile` option (the recommended form in current `worai` docs for `graph sync run`).
 
 Without root `--config`, standard `worai` config discovery applies:
@@ -103,6 +105,7 @@ jobs:
           profile: production
           config_path: ./worai.toml
           debug: false
+          log_level: info
 ```
 
 ## Optional Runner Setup
