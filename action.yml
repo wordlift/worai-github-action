@@ -1,57 +1,57 @@
-name: 'graph-sync'
-description: 'Graph Sync using worai by WordLift'
-author: 'WordLift'
+name: "graph-sync"
+description: "Graph Sync using worai by WordLift"
+author: "WordLift"
 branding:
-  icon: 'upload-cloud'
-  color: 'blue'
+  icon: "upload-cloud"
+  color: "blue"
 
 inputs:
   profile:
-    description: 'Profile name defined in worai config'
+    description: "Profile name defined in worai config"
     required: true
   config_path:
-    description: 'Optional path passed as --config to worai'
+    description: "Optional path passed as --config to worai"
     required: false
-    default: ''
+    default: ""
   debug:
-    description: 'Enable --debug (true/false)'
+    description: "Enable --debug (true/false)"
     required: false
-    default: 'false'
+    default: "false"
   log_level:
-    description: 'Optional WORAI_LOG_LEVEL value (debug/info/warning/error)'
+    description: "Optional WORAI_LOG_LEVEL value (debug/info/warning/error)"
     required: false
-    default: 'warning'
+    default: "warning"
   working_directory:
-    description: 'Directory where worai should run'
+    description: "Directory where worai should run"
     required: false
-    default: '.'
+    default: "."
   worai_version:
-    description: 'Pinned worai version to install'
+    description: "Pinned worai version to install"
     required: false
-    default: '6.16.2'
+    default: "6.17.6"
   install_playwright:
-    description: 'Install Playwright Python package and browser binaries (true/false)'
+    description: "Install Playwright Python package and browser binaries (true/false)"
     required: false
-    default: 'true'
+    default: "true"
   playwright_version:
-    description: 'Pinned Playwright Python package version to install'
+    description: "Pinned Playwright Python package version to install"
     required: false
-    default: '1.58.0'
+    default: "1.58.0"
   playwright_browser:
-    description: 'Playwright browser to install'
+    description: "Playwright browser to install"
     required: false
-    default: 'chromium'
+    default: "chromium"
   cache_enabled:
-    description: 'Enable dependency cache for pip and Playwright browser binaries (true/false)'
+    description: "Enable dependency cache for pip and Playwright browser binaries (true/false)"
     required: false
-    default: 'true'
+    default: "true"
   cache_key_suffix:
-    description: 'Optional cache key suffix; when empty, key is derived from worai/playwright versions and browser'
+    description: "Optional cache key suffix; when empty, key is derived from worai/playwright versions and browser"
     required: false
-    default: ''
+    default: ""
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Resolve cache settings
       id: resolve_cache
